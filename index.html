@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Calculator app</title>
+  </head>
+  <body>
+    <main class="container">
+      <div class="calc--header">
+        <h2>calc</h2>
+        <div class="calc--switch">
+          <p>theme</p>
+          <div class="calc--switch-bg">
+            <div class="switch--btn">
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+            </div>
+
+            <div class="switch--circle">
+              <button id="one"></button>
+              <button id="two"></button>
+              <button id="three"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc--screen"></div>
+
+      <div class="calc--body">
+        <button data-btn>7</button>
+        <button data-btn>8</button>
+        <button data-btn>9</button>
+        <button data-delete>del</button>
+        <button data-btn>4</button>
+        <button data-btn>5</button>
+        <button data-btn>6</button>
+        <button data-btn class="operator">+</button>
+        <button data-btn>1</button>
+        <button data-btn>2</button>
+        <button data-btn>3</button>
+        <button data-btn class="operator">-</button>
+        <button data-btn>.</button>
+        <button data-btn>0</button>
+        <button data-btn class="operator">/</button>
+        <button data-btn class="operator">*</button>
+        <button data-reset>reset</button>
+        <button data-equals>=</button>
+      </div>
+    </main>
+
+    <footer class="attribution"></footer>
+
+    <script src="./script.js"></script>
+    <script src="switch.js"></script>
+  </body>
+</html>

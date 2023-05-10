@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=Inter:wght@400;700;800&family=League+Spartan:wght@700&family=Lexend+Deca&family=Manrope:wght@500;700&display=swap");
+:root {
+  /*Theme 1
+Backgrounds*/
+
+  --Very-dark-desaturated-blue/*(main background)*/: hsl(222, 26%, 31%);
+  --Very-dark-desaturated-blue-1/*(toggle background, keypad background)*/: hsl(
+    223,
+    31%,
+    20%
+  );
+  --Very-dark-desaturated-blue-2/*(screen background)*/: hsl(224, 36%, 15%);
+
+  /* Keys*/
+  --Desaturated-dark-blue/*(key background)*/: hsl(225, 21%, 49%);
+  --Desaturated-dark-blue-1/*(key shadow)*/: hsl(224, 28%, 35%);
+
+  --Red/*(key background, toggle)*/: hsl(6, 63%, 50%);
+  --Dark-red/*(key shadow)*/: hsl(6, 70%, 34%);
+
+  --Light-grayish-orange/* (key background)*/: hsl(30, 25%, 89%);
+  --Grayish-orange/* (key shadow)*/: hsl(28, 16%, 65%);
+  /* Text*/
+
+  --Very-dark-grayish-blue: hsl(221, 14%, 31%);
+  --White: hsl(0, 0%, 100%);
+  /*Theme 2
+ Backgrounds*/
+
+  --Light-gray/*(main background)*/: hsl(0, 0%, 90%);
+  --Grayish-red/*(toggle background, keypad background)*/: hsl(0, 5%, 81%);
+  --Very-light-gray/* (screen background)*/: hsl(0, 0%, 93%);
+  /*#### Keys*/
+  --Dark-moderate-cyan/* (key background)*/: hsl(185, 42%, 37%);
+  --Very-dark-cyan/*(key shadow)*/: hsl(185, 58%, 25%);
+
+  --Orange/*(key background, toggle)*/: hsl(25, 98%, 40%);
+  --Dark-orange/*(key shadow)*/: hsl(25, 99%, 27%);
+
+  --Light-grayish-yellow/*(key background)*/: hsl(45, 7%, 89%);
+  --Dark-grayish-orange/*(key shadow)*/: hsl(35, 11%, 61%);
+  /*### Text*/
+  --Very-dark-grayish-yellow: hsl(60, 10%, 19%);
+  --White/*(text)*/: hsl(0, 0%, 100%);
+  /*### Theme 3
+#### Backgrounds*/
+  --Very-dark-violet/* (main background)*/: hsl(268, 75%, 9%);
+  --Very-dark-violet/*(toggle background, keypad background, screen background)*/: hsl(
+    268,
+    71%,
+    12%
+  );
+  /*#### Keys*/
+  --Dark-violet/*(key background)*/: hsl(281, 89%, 26%);
+  --Vivid-magenta/* (key shadow)*/: hsl(285, 91%, 52%);
+
+  --Pure-cyan/*(key background, toggle)*/: hsl(176, 100%, 44%);
+  --Soft-cyan/*(key shadow)*/: hsl(177, 92%, 70%);
+
+  --Very-dark-violet/*(key background)*/: hsl(268, 47%, 21%);
+  --Dark-magenta/*(key shadow)*/: hsl(290, 70%, 36%);
+  /*
+#### Text*/
+  --Light-yellow: hsl(52, 100%, 62%);
+  --Very-dark-blue: hsl(198, 20%, 13%);
+  --White: hsl(0, 0%, 100%);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--Very-dark-desaturated-blue);
+  font-weight: 700;
+}
+.container {
+  max-width: 24rem;
+  width: 100%;
+  height: 40rem;
+}
+.calc--header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  color: var(--White);
+}
+.calc--switch {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-end;
+  font-size: 0.6rem;
+}
+.calc--switch p {
+  text-transform: uppercase;
+}
+.switch--btn {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1rem;
+}
+
+.switch--circle {
+  width: 4.5rem;
+  height: 1.5rem;
+  background-color: var(--Very-dark-desaturated-blue-1);
+  border-radius: 0.8rem;
+  position: relative;
+}
+.switch--circle button {
+  position: absolute;
+
+  top: 4%;
+  margin: 0.1rem;
+  border: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  background-color: var(--Dark-red);
+  z-index: 100;
+  border-radius: 50%;
+}
+.switch--circle button:hover {
+  background-color: var(-Red);
+}
+#one {
+  left: 3%;
+}
+#two {
+  left: 35%;
+  opacity: 0;
+}
+#three {
+  right: 3%;
+  opacity: 0;
+}
+.calc--screen {
+  width: 100%;
+  height: 5rem;
+  background-color: var(--Very-dark-desaturated-blue-2);
+  margin: 1.5rem 0 1rem;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--White);
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+.calc--body {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 1rem;
+  padding: 1.2rem 1rem;
+  background-color: var(--Very-dark-desaturated-blue-1);
+}
+.calc--body button {
+  background-color: var(--Light-grayish-orange);
+  padding: 0.2rem 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  box-shadow: 0.02rem 0.2rem var(--Grayish-orange);
+  border-radius: 0.5rem;
+  border: none;
+  user-select: none;
+  cursor: pointer;
+}
+.calc--screen button:hover {
+  background-color: var(--White);
+}
+button[data-delete],
+button[data-reset] {
+  background-color: var(--Very-dark-desaturated-blue);
+  box-shadow: 0.02rem 0.2rem var(--Very-dark-desaturated-blue-2);
+  color: var(--White);
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+button[data-reset]:hover,
+button[data-delete]:hover {
+  background-color: hsl(225, 21%, 49%);
+}
+button[data-reset],
+button[data-equals] {
+  grid-column: span 2;
+}
+button[data-equals] {
+  background-color: var(--Dark-red);
+  box-shadow: 0.02rem 0.2rem var(--Dark-red);
+  color: var(--White);
+}
+button[data-equals]:hover {
+  background-color: var(--Red);
+}
+@media screen and (min-width: 300px) {
+  .container {
+    width: 22rem;
+  }
+}
