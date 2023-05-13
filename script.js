@@ -114,6 +114,7 @@ resetBtn.addEventListener("click", () => {
   operator = "";
   secondNumber = "";
   displayValue = "";
+  decimalButton.disabled = false;
   calcScreen.textContent = "";
 });
 
