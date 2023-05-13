@@ -34,12 +34,21 @@ let operator = '';
 let secondNumber = '';
 let displayValue = '';
 
+const decimalButton = document.querySelector('.decimal');
+decimalButton.addEventListener('click', () => {
+  appendNumber('.');
+  decimalButton.disabled = true;
+});
+
 function appendNumber(number) {
+    if (number === '.' && calcScreen.textContent.includes('.')) {
+      return;
+    }
     calcScreen.textContent += number;
     if (!operator) {
-        firstNumber += number.toString();
+      firstNumber += number.toString();
     } else {
-        secondNumber += number.toString();
+      secondNumber += number.toString();
     }
   }
 
