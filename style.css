@@ -87,8 +87,9 @@ body {
 .calc--header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   color: var(--White);
+  gap: 1em;
 }
 .calc--switch {
   display: flex;
