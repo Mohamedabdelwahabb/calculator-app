@@ -82,64 +82,8 @@ body {
 .container {
   max-width: 24rem;
   width: 100%;
-  height: 40rem;
-}
-.calc--header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--White);
-  height: 10rem;
-  gap: 1em;
-}
-.calc--switch {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-end;
-  font-size: 0.6rem;
-}
-.calc--switch p {
-  text-transform: uppercase;
-}
-.switch--btn {
-  display: flex;
-  justify-content: space-around;
-  font-size: 1rem;
 }
 
-.switch--circle {
-  width: 4.5rem;
-  height: 1.5rem;
-  background-color: var(--Very-dark-desaturated-blue-1);
-  border-radius: 0.8rem;
-  position: relative;
-}
-.switch--circle button {
-  position: absolute;
-
-  top: 4%;
-  margin: 0.1rem;
-  border: none;
-  width: 1.1rem;
-  height: 1.1rem;
-  background-color: var(--Dark-red);
-  z-index: 100;
-  border-radius: 50%;
-}
-.switch--circle button:hover {
-  background-color: var(-Red);
-}
-#one {
-  left: 3%;
-}
-#two {
-  left: 35%;
-  opacity: 0;
-}
-#three {
-  right: 3%;
-  opacity: 0;
-}
 .calc--screen {
   width: 100%;
   height: 5rem;
