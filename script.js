@@ -47,11 +47,12 @@ function appendNumber(number) {
   if (number === "." && calcScreen.textContent.includes(".")) {
     return;
   }
+  decimalButton.disabled = false;
   calcScreen.textContent += number;
   if (!operator) {
-    firstNumber += number.toString();
+    firstNumber += number;
   } else {
-    secondNumber += number.toString();
+    secondNumber += number;
   }
 }
 
@@ -66,13 +67,15 @@ function setOperator(selectedOperator) {
 
 function calculate() {
   if (firstNumber && operator && secondNumber) {
+    console.log(firstNumber, "eee", secondNumber, operator);
     const result = operate(
       operator,
       parseFloat(firstNumber),
       parseFloat(secondNumber)
-    );
-    displayValue = result.toString();
-    firstNumber = result.toString();
+    ).toFixed(4);
+    displayValue = +result;
+    firstNumber = +result;
+    console.log(displayValue);
     operator = "";
     secondNumber = "";
     updateDisplay();
@@ -101,7 +104,6 @@ const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const selectedOperator = button.getAttribute("data-operator");
-    console.log(selectedOperator);
     setOperator(selectedOperator);
   });
 });
@@ -122,9 +124,34 @@ resetBtn.addEventListener("click", () => {
 });
 
 const deleteButton = document.querySelector("[data-delete]");
-
+const deleteDigit = () => {
+  firstNumber = firstNumber.toString().slice(0, -1);
+  calcScreen.textContent = firstNumber;
+};
 deleteButton.addEventListener("click", () => {
-  calcScreen.textContent = calcScreen.textContent.slice(0, -1);
+  deleteDigit();
 });
 
 updateDisplay();
+const handleKeyboard = ({ repeat, key }) => {
+  if (repeat) return;
+  if (key === "+") {
+    setOperator(key);
+  } else if (key === "-") {
+    setOperator(key);
+  } else if (key === "/") {
+    setOperator(key);
+  } else if (key === "*") {
+    setOperator(key);
+  } else if (key === "Enter") {
+    calculate();
+  } else if (key === "Backspace") {
+    deleteDigit();
+  } else {
+    appendNumber(key);
+  }
+};
+
+// KEYBOARD SUPPORT INFO BUTTON OPENER/CLOSER
+
+document.addEventListener("keydown", handleKeyboard);
