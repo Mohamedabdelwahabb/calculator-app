@@ -1,3 +1,17 @@
+const decimalButton = document.querySelector(".decimal");
+const numberButtons = document.querySelectorAll("[data-btn]");
+const deleteButton = document.querySelector("[data-delete]");
+const resetBtn = document.querySelector("[data-reset]");
+const calcScreen = document.querySelector(".calc--screen");
+const operatorButtons = document.querySelectorAll(".operator");
+const equalsButton = document.querySelector("[data-equals]");
+
+const maxDigits = 9;
+let firstNumber = "";
+let operator = "";
+let secondNumber = "";
+let displayValue = "";
+
 function add(a, b) {
   return a + b;
 }
@@ -32,28 +46,35 @@ function operate(operator, a, b) {
   }
 }
 
-let firstNumber = "";
-let operator = "";
-let secondNumber = "";
-let displayValue = "";
-
-const decimalButton = document.querySelector(".decimal");
 decimalButton.addEventListener("click", () => {
   appendNumber(".");
   decimalButton.disabled = true;
 });
 
 function appendNumber(number) {
-  if (number === "." && calcScreen.textContent.includes(".")) {
+  if (displayValue.toString().length >= maxDigits) {
+    return;
+  }
+  if (number === "." && displayValue.toString().includes(".")) {
+    return;
+  }
+  if (number === "0" && displayValue === "0") {
+    return; // Prevent typing more than one zero on the left side
+  }
+  if (!operator && firstNumber.toString().length >= maxDigits) {
+    return;
+  }
+  if (operator && secondNumber.toString().length >= maxDigits) {
     return;
   }
   decimalButton.disabled = false;
-  calcScreen.textContent += number;
+  displayValue += number;
   if (!operator) {
     firstNumber += number;
   } else {
     secondNumber += number;
   }
+  updateDisplay();
 }
 
 function setOperator(selectedOperator) {
@@ -67,7 +88,6 @@ function setOperator(selectedOperator) {
 
 function calculate() {
   if (firstNumber && operator && secondNumber) {
-    console.log(firstNumber, "eee", secondNumber, operator);
     const result = operate(
       operator,
       parseFloat(firstNumber),
@@ -75,7 +95,6 @@ function calculate() {
     ).toFixed(4);
     displayValue = +result;
     firstNumber = +result;
-    console.log(displayValue);
     operator = "";
     secondNumber = "";
     updateDisplay();
@@ -92,7 +111,6 @@ function updateDisplay() {
   }
 }
 
-const numberButtons = document.querySelectorAll("[data-btn]");
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const number = button.getAttribute("data-btn");
@@ -100,7 +118,6 @@ numberButtons.forEach((button) => {
   });
 });
 
-const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const selectedOperator = button.getAttribute("data-operator");
@@ -108,12 +125,7 @@ operatorButtons.forEach((button) => {
   });
 });
 
-const equalsButton = document.querySelector("[data-equals]");
 equalsButton.addEventListener("click", calculate);
-
-const resetBtn = document.querySelector("[data-reset]");
-const calcScreen = document.querySelector(".calc--screen");
-
 resetBtn.addEventListener("click", () => {
   firstNumber = "";
   operator = "";
@@ -121,37 +133,39 @@ resetBtn.addEventListener("click", () => {
   displayValue = "";
   decimalButton.disabled = false;
   calcScreen.textContent = "";
+  updateDisplay();
 });
 
-const deleteButton = document.querySelector("[data-delete]");
 const deleteDigit = () => {
-  firstNumber = firstNumber.toString().slice(0, -1);
-  calcScreen.textContent = firstNumber;
+  if (displayValue !== "") {
+    displayValue = displayValue.toString().slice(0, -1);
+    if (!operator) {
+      firstNumber = firstNumber.toString().slice(0, -1);
+    } else {
+      secondNumber = secondNumber.toString().slice(0, -1);
+    }
+    updateDisplay();
+  }
 };
+
 deleteButton.addEventListener("click", () => {
   deleteDigit();
 });
 
-updateDisplay();
-const handleKeyboard = ({ repeat, key }) => {
-  if (repeat) return;
-  if (key === "+") {
-    setOperator(key);
-  } else if (key === "-") {
-    setOperator(key);
-  } else if (key === "/") {
-    setOperator(key);
-  } else if (key === "*") {
+function handleKeyboard(event) {
+  const key = event.key;
+  if (key === "+" || key === "-" || key === "/" || key === "*") {
     setOperator(key);
   } else if (key === "Enter") {
     calculate();
   } else if (key === "Backspace") {
     deleteDigit();
-  } else {
+  } else if (key === ".") {
+    appendNumber(key);
+  } else if (key >= "0" && key <= "9") {
     appendNumber(key);
   }
-};
-
-// KEYBOARD SUPPORT INFO BUTTON OPENER/CLOSER
-
+}
 document.addEventListener("keydown", handleKeyboard);
+
+updateDisplay();
