@@ -106,9 +106,14 @@ function updateDisplay() {
     calcScreen.textContent = `${firstNumber} ${operator} ${secondNumber}`;
   } else if (operator) {
     calcScreen.textContent = `${firstNumber} ${operator}`;
+  } else if (secondNumber) {
+    calcScreen.textContent = secondNumber;
+  } else if (firstNumber) {
+    calcScreen.textContent = firstNumber;
   } else {
-    calcScreen.textContent = displayValue;
+    calcScreen.textContent = "0";
   }
+  console.log(displayValue);
 }
 
 numberButtons.forEach((button) => {
@@ -137,15 +142,21 @@ resetBtn.addEventListener("click", () => {
 });
 
 const deleteDigit = () => {
-  if (displayValue !== "") {
-    displayValue = displayValue.toString().slice(0, -1);
-    if (!operator) {
-      firstNumber = firstNumber.toString().slice(0, -1);
-    } else {
-      secondNumber = secondNumber.toString().slice(0, -1);
-    }
-    updateDisplay();
+  if (secondNumber !== "") {
+    secondNumber = secondNumber.toString().slice(0, -1);
+    displayValue = secondNumber;
+  } else if (operator !== "") {
+    operator = "";
+  } else if (firstNumber !== "") {
+    firstNumber = firstNumber.toString().slice(0, -1);
+    displayValue = firstNumber;
   }
+
+  if (displayValue === "") {
+    displayValue = "0";
+  }
+
+  updateDisplay();
 };
 
 deleteButton.addEventListener("click", () => {
